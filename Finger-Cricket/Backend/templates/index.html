@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask WebSockets - Send & Receive</title>
+</head>
+<body>
+    <h1>Flask WebSocket Chat</h1>
+    <input type="text" id="messageInput" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+    <ul id="messages"></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Receive messages from server
+        socket.on('receive_message', function(data) {
+            let msgList = document.getElementById("messages");
+            let newMsg = document.createElement("li");
+            newMsg.innerText = data.message;
+            msgList.appendChild(newMsg);
+        });
+
+        function sendMessage() {
+            let msgInput = document.getElementById("messageInput");
+            let message = msgInput.value;
+            socket.emit('send_message', {message: message});
+            msgInput.value = "";
+        }
+    </script>
+</body>
+</html>
