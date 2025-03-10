@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    font-family: 'Inter', 'Roboto', sans-serif;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 80px;
+}
+
+/* Logout Button */
+.logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    padding: 12px 28px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #00cccc, #008080);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+    letter-spacing: 0.5px;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+}
+
+.logout-btn:hover {
+    background: linear-gradient(135deg, #00e6e6, #00cccc);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 255, 255, 0.5);
+}
+
+.logout-btn:active {
+    transform: translateY(1px);
+}
+
+/* Welcome Heading */
+.welcome {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    background: linear-gradient(45deg, #00e6e6, #00cccc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    position: absolute;
+    top: 70px;
+    letter-spacing: 2px;
+}
+
+/* Card Container */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    perspective: 1200px;
+    flex-wrap: wrap;
+    margin-top: 160px;
+}
+
+/* Card Styles */
+.card {
+    width: 340px;
+    height: 400px;
+    border-radius: 16px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    /* Improved transition for smoother scaling */
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+.card:hover {
+    transform: scale(1.15);
+    z-index: 10;
+}
+
+/* Card Inner - separate transition for flip */
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Card Front & Back */
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+    /* Smoother transition for shadows and border */
+    transition: all 0.4s ease;
+    padding: 30px;
+}
+
+/* Glassmorphism Effect for Cards */
+.card-front {
+    background: rgba(0, 12, 25, 0.7);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 204, 204, 0.2);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.card-back {
+    background: linear-gradient(135deg, #008080, #00cccc);
+    color: white;
+    transform: rotateY(180deg);
+    box-shadow: 0 8px 32px rgba(0, 255, 255, 0.4);
+    font-family: 'Orbitron', sans-serif;
+    line-height: 1.5;
+}
+
+/* Enhanced card hover effect with glow */
+.card:hover .card-front {
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+    border-color: rgba(0, 255, 255, 0.5);
+}
+
+.card:hover .card-back {
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+/* Card content styling */
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #00e6e6;
+}
+
+.card-title {
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.card-back p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+/* Loading Text */
+.loading-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #00e6e6;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+
+.loading-text::after {
+    content: "...";
+    animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+    0%, 20% { content: "."; }
+    40%, 60% { content: ".."; }
+    80%, 100% { content: "..."; }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        margin-top: 140px;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 320px;
+        height: 280px;
+    }
+    
+    .card:hover {
+        transform: scale(1.12);
+    }
+
+    .logout-btn {
+        top: 15px;
+        right: 15px;
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+
+    .welcome {
+        font-size: 2.2rem;
+        top: 60px;
+    }
+    
+    .card-front,
+    .card-back {
+        padding: 20px;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome {
+        font-size: 1.8rem;
+        width: 90%;
+    }
+    
+    .card-container {
+        margin-top: 120px;
+    }
+    
+    .card {
+        height: 240px;
+    }
+    
+    .card:hover {
+        transform: scale(1.1);
+    }
+}

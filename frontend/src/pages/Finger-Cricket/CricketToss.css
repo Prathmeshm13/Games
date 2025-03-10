@@ -1,0 +1,613 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Global styles for smoother appearance */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* Main container styling with improved visibility */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  background-color: #0a0e17;
+  background-image: radial-gradient(circle at 10% 20%, rgba(0, 204, 204, 0.15) 0%, rgba(10, 14, 23, 0.95) 70%);
+  font-family: 'Inter', sans-serif;
+  padding: 20px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Enhanced grid lines for better visibility */
+.dashboard-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, rgba(0, 204, 204, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(0, 204, 204, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+/* Improved container contrast and visibility */
+.toss-container {
+  background: rgba(2, 17, 34, 0.9);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 10px 40px rgba(0, 204, 204, 0.3);
+  border-radius: 16px;
+  padding: 25px 30px;
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Enhanced title styling for better visibility */
+.toss-title {
+  color: #00ffff;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 15px rgba(0, 230, 230, 0.6), 0 0 30px rgba(0, 230, 230, 0.3);
+  letter-spacing: 2px;
+}
+
+.toss-subtitle {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-family: 'Inter', sans-serif;
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Fixed team selection visibility */
+.team-selection {
+  margin-bottom: 20px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.team-selection-title {
+  color: #00ffff;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 10px rgba(0, 230, 230, 0.5);
+}
+
+.teams {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+/* Improved button visibility and contrast */
+.team-button {
+  background: rgba(0, 30, 60, 0.8);
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 1.3rem;
+  font-family: 'Orbitron', sans-serif;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 204, 204, 0.25);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  width: 180px;
+}
+
+.team-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
+  border-color: rgba(0, 255, 255, 0.7);
+  background: rgba(0, 40, 70, 0.8);
+}
+
+.team-button.selected {
+  background: linear-gradient(135deg, rgba(0, 204, 204, 0.5), rgba(0, 80, 80, 0.7));
+  border-color: rgba(0, 255, 255, 0.8);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
+}
+
+/* Enhanced toss options styling */
+.toss-options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.toss-button {
+  background: rgba(0, 30, 60, 0.8);
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 1.3rem;
+  font-family: 'Orbitron', sans-serif;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 204, 204, 0.25);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  width: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.toss-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+  transition: all 0.5s;
+}
+
+.toss-button:hover:not(.disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
+  border-color: rgba(0, 255, 255, 0.7);
+  background: rgba(0, 40, 70, 0.8);
+}
+
+.toss-button:hover:not(.disabled):before {
+  left: 100%;
+}
+
+.toss-button.selected {
+  background: linear-gradient(135deg, rgba(0, 204, 204, 0.5), rgba(0, 80, 80, 0.7));
+  border-color: rgba(0, 255, 255, 0.8);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
+}
+
+.toss-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Improved coin styling with better visibility */
+.coin-container {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0 20px 0;
+  perspective: 1000px;
+  height: 120px;
+}
+
+.coin {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 3s ease-out;
+}
+
+.coin.flipping {
+  animation: flip 3s forwards;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateY(0);
+  }
+  100% {
+    transform: rotateY(1800deg);
+  }
+}
+
+.coin-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  backface-visibility: hidden;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+.coin-face.heads {
+  background: linear-gradient(45deg, #00a3a3, #00ffff);
+  color: #000a12;
+  transform: rotateY(0deg);
+  border: 5px solid rgba(0, 255, 255, 0.4);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.coin-face.tails {
+  background: linear-gradient(45deg, #016b6b, #00b3b3);
+  color: #000a12;
+  transform: rotateY(180deg);
+  border: 5px solid rgba(0, 255, 255, 0.4);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Enhanced result visibility */
+.toss-result {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00ffff;
+  margin: 15px 0 20px 0;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 15px rgba(0, 230, 230, 0.6);
+  animation: fadeIn 0.5s ease-in;
+  letter-spacing: 1px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Improved choice container visibility */
+.choice-container {
+  margin: 15px 0 20px 0;
+  animation: slideIn 0.5s ease-in;
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.choice-title {
+  color: #00ffff;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 10px rgba(0, 230, 230, 0.5);
+}
+
+.choice-options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.choice-button {
+  background: linear-gradient(135deg, #00cccc, #008080);
+  color: white;
+  border: 2px solid rgba(0, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+  overflow: hidden;
+  width: 180px;
+}
+
+.choice-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.5s;
+}
+
+.choice-button:hover {
+  background: linear-gradient(135deg, #00e6e6, #00a3a3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(0, 255, 255, 0.6);
+}
+
+.choice-button:hover:before {
+  left: 100%;
+}
+
+/* Enhanced final message visibility */
+.final-message {
+  font-size: 1.4rem;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(0, 30, 60, 0.7);
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 204, 204, 0.3);
+  animation: fadeIn 0.5s ease-in;
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+}
+
+.highlight-choice {
+  color: #00ffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 10px rgba(0, 230, 230, 0.6);
+  letter-spacing: 1px;
+}
+
+/* Enhanced button styling */
+.start-game {
+  background: linear-gradient(135deg, #00cccc, #008080);
+  color: white;
+  border: 2px solid rgba(0, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 12px 40px;
+  font-size: 1.5rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 2px;
+  animation: pulse 2s infinite;
+  align-self: center;
+}
+
+.start-game:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.5s;
+}
+
+.start-game:hover {
+  background: linear-gradient(135deg, #00e6e6, #00a3a3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(0, 255, 255, 0.6);
+  animation: none;
+}
+
+.start-game:hover:before {
+  left: 100%;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 204, 204, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 204, 204, 0.5);
+  }
+}
+
+.game-btn {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Enhanced back button visibility */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  z-index: 1000;
+  background: linear-gradient(135deg, #006666, #004d4d);
+  border-radius: 6px;
+  min-width: auto;
+  box-shadow: 0 2px 10px rgba(0, 150, 150, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  width: auto;
+  height: auto;
+}
+
+.back-btn:hover {
+  background: linear-gradient(135deg, #008080, #006666);
+  box-shadow: 0 2px 15px rgba(0, 150, 150, 0.6);
+}
+
+/* Override any conflicting styles */
+.logout-btn.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  width: auto;
+  height: auto;
+  font-family: 'Inter', sans-serif;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Desktop optimizations */
+@media (min-width: 1200px) {
+  .toss-container {
+    padding: 30px 50px;
+    max-width: 1200px;
+  }
+  
+  .teams, .toss-options, .choice-options {
+    gap: 60px;
+  }
+  
+  .team-button, .toss-button, .choice-button {
+    width: 200px;
+    font-size: 1.4rem;
+    padding: 12px 25px;
+  }
+  
+  .coin {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .coin-container {
+    height: 150px;
+  }
+  
+  .coin-face {
+    font-size: 3.5rem;
+  }
+  
+  .start-game {
+    padding: 15px 50px;
+    font-size: 1.6rem;
+  }
+
+  .toss-title {
+    font-size: 3rem;
+  }
+
+  .toss-subtitle {
+    font-size: 1.4rem;
+  }
+}
+
+/* Improved responsive adjustments */
+@media (max-width: 768px) {
+  .toss-container {
+    padding: 20px;
+  }
+  
+  .toss-title {
+    font-size: 2rem;
+  }
+  
+  .team-button, .toss-button, .choice-button {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    width: 140px;
+  }
+  
+  .teams, .toss-options, .choice-options {
+    gap: 20px;
+  }
+  
+  .coin {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .coin-container {
+    height: 100px;
+  }
+  
+  .coin-face {
+    font-size: 2.5rem;
+  }
+  
+  .start-game {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 15px 10px;
+  }
+
+  .toss-container {
+    padding: 15px 10px;
+  }
+  
+  .toss-title {
+    font-size: 1.6rem;
+  }
+  
+  .toss-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .teams, .toss-options, .choice-options {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .team-button, .toss-button, .choice-button {
+    width: 100%;
+    max-width: 160px;
+    padding: 8px 15px;
+    font-size: 1rem;
+  }
+  
+  .coin {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .coin-container {
+    height: 80px;
+    margin: 10px 0 15px 0;
+  }
+  
+  .coin-face {
+    font-size: 1.8rem;
+  }
+  
+  .final-message {
+    font-size: 1rem;
+    padding: 10px;
+    margin: 15px 0;
+  }
+  
+  .start-game {
+    width: 100%;
+    max-width: 160px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    margin-top: 15px;
+  }
+}
